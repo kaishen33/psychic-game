@@ -1,52 +1,46 @@
-
 var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
-var guessedLetters = "#";
+var userKey = "#";
 
-var chances = (Math.floor(Math.random()*26));
-var answer = letters[chances];
-    console.log(answer);
+var randomChoice = (Math.floor(Math.random()*26));
+var answer = letters[randomChoice];
 
-var guesses = document.getElementById("Guesses");
-var freshWins = document.getElementById("Wins");
-var freshLosses = document.getElementById("Losses");
-var remain = document.getElementById("Remain");
+var Wins = document.getElementById("Wins"); 
+var Losses = document.getElementById("Losses"); 
+var Remain = document.getElementById("Remain"); 
+var Guessed = document.getElementById("Guessed"); 
 
-freshWins.textContent = wins;
-freshLosses.textContent = losses;
-remain.textContent = guessesLeft;
+Wins.textContent = wins;
+Losses.textContent = losses;
+Remain.textContent = guessesLeft;
 
 document.onkeyup = function(event) {
-    
-    userKey = event.key;
 
+    userKey = event.key;
     if(userKey==answer) {
         wins = wins+1;
-        freshWins.textContent = wins;
+        Wins.textContent = wins;
         guessesLeft = 10;
-        remain.textContent = guessesLeft;
-        guesses.textContent = "";
-        newRound = (Math.floor(Math.random()*26));
-        answer = letters[newRound];
-        console.log(answer);
-       
-    } else if(userKey !== answer && letters.indexOf(userKey) !== -1) {
-        guesses.insertAdjacentElement("beforeend", userKey + ", ");
-        guessesLeft = guessesLeft -1;
-        remain.textContent = guessesLeft; 
+        Remain.textContent = guessesLeft;
+        Guessed.textContent = "";
+        newAnswer = (Math.floor(Math.random()*26));
+        answer = letters[newAnswer];
 
+    } else if(userKey != answer && letters.indexOf(userKey) != -1) {
+        Guessed.insertAdjacentText("beforeend", userKey + ", ");
+        guessesLeft = guessesLeft - 1;
+        Remain.textContent = guessesLeft;
         if(guessesLeft < 1) {
             losses = losses+1;
-            freshLosses.textContent = losses;
+            Losses.textContent = losses;
             guessesLeft = 10;
-            remain.textContent = guessesLeft;
-            guesses.textContent = "";
-            newRound = (Math.floor(Math.random()*26));
-            answer = letters[newRound];
-            console.log(answer);
-        }
-    }
+            Remain.textContent = guessesLeft;
+            Guessed.textContent = "";
+            newAnswer = (Math.floor(Math.random()*26));
+            answer = letters[newAnswer];
+        }  
+    }  
 }
